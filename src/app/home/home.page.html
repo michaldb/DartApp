@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+      <ion-title>{{channelName}}</ion-title>
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-list>
+  <ion-item *ngFor="let message of messages">
+    <ion-label>{{message.content}} - {{message.displayName}}</ion-label>
+  </ion-item>
+</ion-list>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>Speler 1</ion-card-subtitle>
+    <ion-card-title>{{playerOneScore}}</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <input [(ngModel)]="testinput"><br>
+    <ion-button (click)="test()">Enter</ion-button>
+  </ion-card-content>
+</ion-card>
+
+<ion-footer>
+  <ion-toolbar>
+      <div slot="start" class="ion-margin-start w-100">
+          <ion-input [(ngModel)]="newMessage"></ion-input>
+      </div>
+      <ion-buttons slot="end" class="ion-margin-horizontal">
+          <ion-button (click)="sendMessage()" [disabled]="newMessage === undefined">
+              <ion-icon slot="icon-only" name="send"></ion-icon>
+          </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

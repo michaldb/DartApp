@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Classic bot</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>New Game</ion-card-subtitle>
+      <ion-card-title>Classic bot</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-label>
+        Average throw
+      </ion-label>
+      <ion-range [(ngModel)]="averageThrowBot" min="20" max="80" color="secondary" step="5" snaps="true" [pinFormatter]="customFormatter" [pin]="true">
+        <ion-label slot="start">Easy</ion-label>
+        <ion-label slot="end">Hard</ion-label>
+      </ion-range>
+
+      <ion-label>
+        Start score
+      </ion-label>
+      <ion-list>
+        <ion-radio-group [(ngModel)]="startScore">
+          <ion-item>
+            <ion-label>501</ion-label>
+            <ion-radio value="501"></ion-radio>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>301</ion-label>
+            <ion-radio value="301"></ion-radio>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>101</ion-label>
+            <ion-radio value="101"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+      <ion-button expand="block" (click)="startNewGame()">Start Game</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Classic bot</ion-card-subtitle>
+      <ion-card-title>My Games</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let classicGame of classicGames">
+          <ion-label [routerLink]="['classicbotgame', classicGame.id]">{{formatFirestoreDatetime(classicGame.date)}}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">DartApp</string>
+    <string name="title_activity_main">DartApp</string>
+    <string name="package_name">be.dartapp</string>
+    <string name="custom_url_scheme">be.dartapp</string>
+</resources>

@@ -1,0 +1,38 @@
+<ion-app>
+  <ion-split-pane contentId="main">
+    <ion-menu #menu contentId="main">
+      <ion-content>
+        <ion-item>
+          <ion-avatar slot="start">
+            <img alt='avatar' [src]="authService ? authService.getProfilePic() : ''">
+          </ion-avatar>
+          <ion-label>
+            <ion-list-header>{{authService ?  authService.getDisplayName() : ''}}</ion-list-header>
+            <ion-note *ngIf="authService ? authService.getEmail() : false"
+                      class="ion-margin-start">{{authService ? authService.getEmail() : ''}}</ion-note>
+          </ion-label>
+        </ion-item>
+
+        <ion-list *ngIf="authService ? authService.isLoggedIn() : ''" lines="none">
+          <ion-item (click)="menu.close()">
+            <div [routerLink]="['home']">Home</div>
+          </ion-item>
+          <ion-item (click)="menu.close()">
+            <div [routerLink]="['classicbot']">Classic Bot</div>
+          </ion-item>
+          <ion-item (click)="menu.close()">
+            <div [routerLink]="['tacticsbot']">Tactics Bot</div>
+          </ion-item>
+          <ion-item (click)="menu.close()">
+            <div [routerLink]="['stats']">Stats</div>
+          </ion-item>
+          <ion-item (click)="menu.close()">
+            <div (click)="authService ?  authService.signOut(): ''">Logout</div>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+
+    <ion-router-outlet id="main"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>
