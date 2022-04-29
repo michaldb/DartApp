@@ -23,7 +23,8 @@ export class DatabaseService {
   async startNewGame(startscore, averageThrowBot): Promise<void> {
     const classicGame: ClassicGame = {
       startScore: Number(startscore),
-      remainingScore: Number(startscore),
+      remainingScorePlayer: Number(startscore),
+      remainingScoreBot: Number(startscore),
       averageThrowBot: Number(averageThrowBot),
       averageThrowPlayer: Number(0),
       playerThrows: [],

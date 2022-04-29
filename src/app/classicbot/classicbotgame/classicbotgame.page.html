@@ -13,20 +13,17 @@
       <ion-card-subtitle>{{formatFirestoreDatetime(classicGameObj.date)}}</ion-card-subtitle>
       <ion-card-title>Classic - {{classicGameObj.startScore}}</ion-card-title>
     </ion-card-header>
-  
-    <ion-card-content>
-      Average throw bot: {{classicGameObj.averageThrowBot}}
-    </ion-card-content>
   </ion-card>
 
   <ion-card>
     <ion-card-header>
       <ion-card-subtitle>Player</ion-card-subtitle>
-      <ion-card-title>{{classicGameObj.remainingScore}}</ion-card-title>
+      <ion-card-title>{{classicGameObj.remainingScorePlayer}}</ion-card-title>
     </ion-card-header>
   
     <ion-card-content>
       <p>Average throw player: {{classicGameObj.averageThrowPlayer.toFixed(2)}}</p>
+      <p>Last throw: {{lastthrow}}</p>
 
       <input [(ngModel)]="playerThrow"><br>
       <ion-button (click)="inputScore()">Enter</ion-button>
@@ -36,7 +33,7 @@
   <ion-card>
     <ion-card-header>
       <ion-card-subtitle>Bot</ion-card-subtitle>
-      <ion-card-title>{{classicGameObj.remainingScore}}</ion-card-title>
+      <ion-card-title>{{classicGameObj.remainingScoreBot}}</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
