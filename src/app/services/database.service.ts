@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {Message} from '../types/message';
 import {AuthService} from './auth.service';
 import { ClassicGame } from '../types/classicgame';
-import { v4 as uuidv4 } from 'uuid';
 
 // Every import for firestore must come from the following package.
 // All other imports use to older, les performant syntax.
@@ -24,11 +23,12 @@ export class DatabaseService {
   async startNewGame(startscore, averageThrowBot): Promise<void> {
     const classicGame: ClassicGame = {
       startScore: Number(startscore),
+      remainingScore: Number(startscore),
       averageThrowBot: Number(averageThrowBot),
+      averageThrowPlayer: Number(0),
       playerThrows: [],
       botThrows: [],
       user: this.authService.getUserUID(),
-      id: uuidv4(),
       date: Date.now()
     };
 
@@ -43,41 +43,23 @@ export class DatabaseService {
     onSnapshot<ClassicGame>(
       query<ClassicGame>(
         this.getCollectionRef<ClassicGame>(channel),
-        orderBy('date'),
-        where('user', '==', this.authService.getUserUID())
+        orderBy('date', 'desc'),
+        where('user', '==', this.authService.userUid.value)
       ),
       convertResult
     );
   }
 
-  async retrieveMessagesAsSnapshot(channel: string): Promise<Message[]> {
-    const results = await getDocs<Message>(
-      query<Message>(
-        this.getCollectionRef<Message>(channel),
-        orderBy('date')
-      )
+  async retrieveGameById(id: string): Promise<ClassicGame> {
+    const result = await getDoc<ClassicGame>(
+      this.getDocumentRef<ClassicGame>('classicGame', id)
     );
-
-    return results.docs.map(d => ({...d.data(), key: d.id}));
-  }
-
-  async retrieveMessageAsSnapshot(channel, id): Promise<Message> {
-    const result = await getDoc<Message>(
-      this.getDocumentRef<Message>(channel, id)
-    );
-
     return ({...result.data(), key: result.id});
   }
 
-  async retrieveMessagesInRealTime(channel: string, observer: ((messages: Message[]) => void)): Promise<void> {
-    const convertResult = x => observer(x.docs.map(d => ({...d.data(), key: d.id})));
-    onSnapshot<Message>(
-      query<Message>(
-        this.getCollectionRef<Message>(channel),
-        orderBy('date')
-      ),
-      convertResult
-    );
+  async updateGameById(id: string, game: ClassicGame): Promise<void> {
+    delete game.key;
+    await updateDoc(this.getDocumentRef('classicGame', id), game);
   }
 
   private getCollectionRef<T>(collectionName: string): CollectionReference<T> {

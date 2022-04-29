@@ -4,16 +4,18 @@ import { Router } from '@angular/router';
 import { Auth, signInWithCredential, signOut } from '@angular/fire/auth';
 import { updateProfile, GoogleAuthProvider, PhoneAuthProvider, User } from 'firebase/auth';
 import { Capacitor } from '@capacitor/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
+  userUid: BehaviorSubject<string>;
   private currentUser: null | User = null;
   private verificationId: string;
 
   constructor(public auth: Auth, public router: Router) {
+    this.userUid = new BehaviorSubject<string>(this.getUserUID());
     this.auth.onAuthStateChanged(user => this.setCurrentUser(user));
   }
 
@@ -81,5 +83,7 @@ export class AuthService {
     // } else {
     //   await this.router.navigate(['/login']);
     // }
+
+    this.userUid.next(this.getUserUID());
   }
 }

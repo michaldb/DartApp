@@ -58,7 +58,7 @@
     <ion-card-content>
       <ion-list>
         <ion-item *ngFor="let classicGame of classicGames">
-          <ion-label [routerLink]="['classicbotgame', classicGame.id]">{{formatFirestoreDatetime(classicGame.date)}}</ion-label>
+          <ion-label [routerLink]="['classicbotgame', classicGame.key]">{{formatFirestoreDatetime(classicGame.date)}}</ion-label>
         </ion-item>
       </ion-list>
     </ion-card-content>

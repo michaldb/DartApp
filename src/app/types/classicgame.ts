@@ -1,9 +1,11 @@
 export interface ClassicGame {
     startScore: number;
+    remainingScore: number;
     averageThrowBot: number;
-    playerThrows: [];
-    botThrows: [];
+    averageThrowPlayer: number;
+    playerThrows: number[];
+    botThrows: number[];
     user: string;
-    id?: string;
+    key?: string;
     date: number;
 }

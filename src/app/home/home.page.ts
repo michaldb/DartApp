@@ -15,7 +15,6 @@ export class HomePage {
   testinput: number;
 
   constructor(private database: DatabaseService) {
-    this.database.retrieveMessagesInRealTime(this.channelName, x => this.messages = x);
   }
 
   async sendMessage(): Promise<void> {
