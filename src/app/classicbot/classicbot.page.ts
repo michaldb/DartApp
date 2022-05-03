@@ -9,7 +9,7 @@ import { DatabaseService } from './../services/database.service';
 })
 export class ClassicbotPage implements OnInit {
   startScore: number;
-  averageThrowBot: number;
+  difficulty: number;
   classicGames: ClassicGame[] = [];
 
   constructor(private database: DatabaseService) {
@@ -17,7 +17,7 @@ export class ClassicbotPage implements OnInit {
   }
 
   ngOnInit() {
-    this.averageThrowBot = 20;
+    this.difficulty = 3;
   }
 
   public customFormatter(value: number) {
@@ -30,6 +30,6 @@ export class ClassicbotPage implements OnInit {
   }
 
   async startNewGame(): Promise<void> {
-    await this.database.startNewGame(this.startScore, this.averageThrowBot);
+    await this.database.startNewGame(this.startScore, this.difficulty);
   }
 }

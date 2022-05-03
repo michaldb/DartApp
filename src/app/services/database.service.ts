@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Message} from '../types/message';
 import {AuthService} from './auth.service';
 import { ClassicGame } from '../types/classicgame';
 
@@ -20,15 +19,15 @@ export class DatabaseService {
   constructor(private authService: AuthService, private fireStore: Firestore) {
   }
 
-  async startNewGame(startscore, averageThrowBot): Promise<void> {
+  async startNewGame(startscore, difficulty): Promise<void> {
     const classicGame: ClassicGame = {
       startScore: Number(startscore),
       remainingScorePlayer: Number(startscore),
       remainingScoreBot: Number(startscore),
-      averageThrowBot: Number(averageThrowBot),
-      averageThrowPlayer: Number(0),
       playerThrows: [],
       botThrows: [],
+      finished: false,
+      difficulty: Number(difficulty),
       user: this.authService.getUserUID(),
       date: Date.now()
     };
@@ -45,7 +44,8 @@ export class DatabaseService {
       query<ClassicGame>(
         this.getCollectionRef<ClassicGame>(channel),
         orderBy('date', 'desc'),
-        where('user', '==', this.authService.userUid.value)
+        where('user', '==', this.authService.userUid.value),
+        where('finished', '==', false)
       ),
       convertResult
     );

@@ -16,9 +16,9 @@
 
     <ion-card-content>
       <ion-label>
-        Average throw
+        Difficulty bot
       </ion-label>
-      <ion-range [(ngModel)]="averageThrowBot" min="20" max="80" color="secondary" step="5" snaps="true" [pinFormatter]="customFormatter" [pin]="true">
+      <ion-range [(ngModel)]="difficulty" min="1" max="5" color="secondary" step="1" snaps="true" [pinFormatter]="customFormatter" [pin]="true">
         <ion-label slot="start">Easy</ion-label>
         <ion-label slot="end">Hard</ion-label>
       </ion-range>
@@ -52,13 +52,14 @@
   <ion-card>
     <ion-card-header>
       <ion-card-subtitle>Classic bot</ion-card-subtitle>
-      <ion-card-title>My Games</ion-card-title>
+      <ion-card-title>My open games</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
+      <p *ngIf="classicGames.length === 0">No open games, start a new game.</p>
       <ion-list>
         <ion-item *ngFor="let classicGame of classicGames">
-          <ion-label [routerLink]="['classicbotgame', classicGame.key]">{{formatFirestoreDatetime(classicGame.date)}}</ion-label>
+          <ion-label [routerLink]="['classicbotgame', classicGame.key]">{{formatFirestoreDatetime(classicGame.date)}} / Difficulty: {{classicGame.difficulty}}</ion-label>
         </ion-item>
       </ion-list>
     </ion-card-content>

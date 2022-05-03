@@ -13,6 +13,12 @@
       <ion-card-subtitle>{{formatFirestoreDatetime(classicGameObj.date)}}</ion-card-subtitle>
       <ion-card-title>Classic - {{classicGameObj.startScore}}</ion-card-title>
     </ion-card-header>
+    <ion-card-content>
+      <ion-row class="ion-align-items-center">
+        <p>Difficulty: {{classicGameObj.difficulty}}</p>
+        <ion-button (click)="endGame()" color="danger" class="ion-margin-horizontal">End Game</ion-button>
+      </ion-row>
+    </ion-card-content>
   </ion-card>
 
   <ion-card>
@@ -22,11 +28,13 @@
     </ion-card-header>
   
     <ion-card-content>
-      <p>Average throw player: {{classicGameObj.averageThrowPlayer.toFixed(2)}}</p>
-      <p>Last throw: {{lastthrow}}</p>
+      <p>Average throw player: <span *ngIf="averageThrowPlayer">{{averageThrowPlayer.toFixed(2)}}</span></p>
+      <p>Last throw: {{lastthrowPlayer}}</p>
 
-      <input [(ngModel)]="playerThrow"><br>
-      <ion-button (click)="inputScore()">Enter</ion-button>
+      <ion-row class="ion-align-items-center">
+        <input [(ngModel)]="playerThrow"><br>
+        <ion-button (click)="inputScore()" class="ion-margin-horizontal">Enter</ion-button>
+      </ion-row>
     </ion-card-content>
   </ion-card>
 
@@ -37,8 +45,9 @@
     </ion-card-header>
 
     <ion-card-content>
-      <p>Average throw bot: {{classicGameObj.averageThrowBot}}</p> 
+      <p>Average throw bot: <span *ngIf="averageThrowBot">{{averageThrowBot.toFixed(2)}}</span></p>
+      <p>Last throw: {{lastthrowBot}}</p>
     </ion-card-content>
   </ion-card>
-  
+
 </ion-content>

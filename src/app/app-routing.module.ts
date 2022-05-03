@@ -20,10 +20,6 @@ const routes: Routes = [
     loadChildren: () => import('./classicbot/classicbot.module').then( m => m.ClassicbotPageModule)
   },
   {
-    path: 'tacticsbot',
-    loadChildren: () => import('./tacticsbot/tacticsbot.module').then( m => m.TacticsbotPageModule)
-  },
-  {
     path: 'stats',
     loadChildren: () => import('./stats/stats.module').then( m => m.StatsPageModule)
   }
