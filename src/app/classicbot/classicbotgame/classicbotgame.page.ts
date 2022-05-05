@@ -42,7 +42,7 @@ export class ClassicbotgamePage implements OnInit {
     await alert.present();
   }
 
-  public formatFirestoreDatetime(timestamp: string) {
+  public formatFirestoreDatetime(timestamp: number) {
     const date = new Date(timestamp);
     return `${date.getDate()}/${(date.getMonth() + 1)}/${date.getFullYear()} - ${date.getHours()}:${('0'+ date.getMinutes()).slice(-2)}`;
   }

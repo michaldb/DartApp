@@ -24,7 +24,7 @@ export class ClassicbotPage implements OnInit {
     return `${value}`;
   }
 
-  public formatFirestoreDatetime(timestamp: string) {
+  public formatFirestoreDatetime(timestamp: number): string {
     const date = new Date(timestamp);
     return `${date.getDate()}/${(date.getMonth() + 1)}/${date.getFullYear()} - ${date.getHours()}:${('0'+ date.getMinutes()).slice(-2)}`;
   }
