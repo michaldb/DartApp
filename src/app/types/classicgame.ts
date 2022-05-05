@@ -6,6 +6,7 @@ export interface ClassicGame {
     botThrows: number[];
     difficulty: number;
     finished: boolean;
+    haswon: boolean;
     user: string;
     key?: string;
     date: number;

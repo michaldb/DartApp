@@ -27,6 +27,7 @@ export class DatabaseService {
       playerThrows: [],
       botThrows: [],
       finished: false,
+      haswon: false,
       difficulty: Number(difficulty),
       user: this.authService.getUserUID(),
       date: Date.now()

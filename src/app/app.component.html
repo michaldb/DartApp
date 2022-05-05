@@ -7,9 +7,7 @@
             <img alt='avatar' [src]="authService ? authService.getProfilePic() : ''">
           </ion-avatar>
           <ion-label>
-            <ion-list-header>{{authService ?  authService.getDisplayName() : ''}}</ion-list-header>
-            <ion-note *ngIf="authService ? authService.getEmail() : false"
-                      class="ion-margin-start">{{authService ? authService.getEmail() : ''}}</ion-note>
+            <ion-list-header>{{authService ? authService.getEmail() : ''}}</ion-list-header>
           </ion-label>
         </ion-item>
 

@@ -59,7 +59,17 @@
       <p *ngIf="classicGames.length === 0">No open games, start a new game.</p>
       <ion-list>
         <ion-item *ngFor="let classicGame of classicGames">
-          <ion-label [routerLink]="['classicbotgame', classicGame.key]">{{formatFirestoreDatetime(classicGame.date)}} / Difficulty: {{classicGame.difficulty}}</ion-label>
+          <ion-label [routerLink]="['classicbotgame', classicGame.key]">
+            <h2>Start: {{classicGame.startScore}}</h2>
+            <h3>{{formatFirestoreDatetime(classicGame.date)}}</h3>
+            <p [ngSwitch]="classicGame.difficulty">Difficulty: 
+              <span *ngSwitchCase="1">Beginner</span>
+              <span *ngSwitchCase="2">Easy</span>
+              <span *ngSwitchCase="3">Medium</span>
+              <span *ngSwitchCase="4">Hard</span>
+              <span *ngSwitchCase="5">Extreme</span>
+            </p>
+          </ion-label>
         </ion-item>
       </ion-list>
     </ion-card-content>

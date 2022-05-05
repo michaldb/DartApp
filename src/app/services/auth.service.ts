@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 import { Router } from '@angular/router';
 import { Auth, signInWithCredential, signOut } from '@angular/fire/auth';
-import { updateProfile, GoogleAuthProvider, PhoneAuthProvider, User } from 'firebase/auth';
+import { updateProfile, GoogleAuthProvider, PhoneAuthProvider, User, GithubAuthProvider, getAuth, signInWithPopup} from 'firebase/auth';
 import { Capacitor } from '@capacitor/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -52,6 +52,13 @@ export class AuthService {
     }
   }
 
+  async signInWithGithub(): Promise<void> {
+    const provider = new GithubAuthProvider();
+    provider.addScope('repo');
+    const auth = getAuth();
+    signInWithPopup(auth, provider);
+  }
+
   async sendPhoneVerificationCode(phoneNumber: string): Promise<void> {
     const { verificationId } = await FirebaseAuthentication.signInWithPhoneNumber({ phoneNumber });
     this.verificationId = verificationId;
@@ -78,11 +85,11 @@ export class AuthService {
    */
   private async setCurrentUser(user: User): Promise<void> {
     this.currentUser = user;
-    // if (this.currentUser) {
-    //   await this.router.navigate(['/']);
-    // } else {
-    //   await this.router.navigate(['/login']);
-    // }
+    if (this.currentUser) {
+      await this.router.navigate(['/']);
+    } else {
+      await this.router.navigate(['/login']);
+    }
 
     this.userUid.next(this.getUserUID());
   }
