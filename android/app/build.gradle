@@ -5,8 +5,8 @@ android {
         debug {
             storeFile file('C:\\Users\\Micha\\Desktop\\DartApp\\key.jks')
             storePassword 'admin123'
-            keyPassword 'admin123'
             keyAlias 'DartApp'
+            keyPassword 'admin123'
         }
     }
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -29,9 +29,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
           signingConfig signingConfigs.debug
         }
-        debug {
-            signingConfig signingConfigs.debug
-        }
+      debug {
+        signingConfig signingConfigs.debug
+      }
     }
 }
 

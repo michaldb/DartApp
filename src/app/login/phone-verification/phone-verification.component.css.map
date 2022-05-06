@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "phone-verification.component.scss"
+    ],
+    "names": [],
+    "file": "phone-verification.component.css"
+}

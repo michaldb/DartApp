@@ -53,10 +53,12 @@ export class AuthService {
   }
 
   async signInWithGithub(): Promise<void> {
-    const provider = new GithubAuthProvider();
-    provider.addScope('repo');
-    const auth = getAuth();
-    signInWithPopup(auth, provider);
+    const { credential: { idToken, accessToken } } = await FirebaseAuthentication.signInWithGithub();
+
+    if (Capacitor.isNativePlatform()) {
+      const credential = GithubAuthProvider.credential(idToken);
+      await signInWithCredential(this.auth, credential);
+    }
   }
 
   async sendPhoneVerificationCode(phoneNumber: string): Promise<void> {
