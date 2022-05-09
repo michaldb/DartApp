@@ -70,6 +70,7 @@
               <span *ngSwitchCase="5">Extreme</span>
             </p>
           </ion-label>
+          <ion-badge *ngIf="checkIsNew(classicGame)" color="success">New</ion-badge>
         </ion-item>
       </ion-list>
     </ion-card-content>

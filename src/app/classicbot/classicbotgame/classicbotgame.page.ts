@@ -72,6 +72,7 @@ export class ClassicbotgamePage implements OnInit {
       if (Number(this.playerThrow) === Number(this.classicGameObj.remainingScorePlayer)) {
         this.presentAlert('You have won!', 'Congratulations you have won the game!', 'You are redirected to the overview page.');
         this.classicGameObj.haswon = true;
+        this.classicGameObj.haswon = true;
         this.endGame();
       }
 

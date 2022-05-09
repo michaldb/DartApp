@@ -39,7 +39,7 @@ export class DatabaseService {
     );
   }
 
-  async retrieveGamesInRealTime(channel: string, observer: ((classicGame: ClassicGame[]) => void)): Promise<void> {
+  async retrieveOpenGamesInRealTime(channel: string, observer: ((classicGame: ClassicGame[]) => void)): Promise<void> {
     const convertResult = x => observer(x.docs.map(d => ({...d.data(), key: d.id})));
     onSnapshot<ClassicGame>(
       query<ClassicGame>(
@@ -47,6 +47,19 @@ export class DatabaseService {
         orderBy('date', 'desc'),
         where('user', '==', this.authService.userUid.value),
         where('finished', '==', false)
+      ),
+      convertResult
+    );
+  }
+
+  async retrieveAllClosedGamesInRealTime(channel: string, observer: ((classicGame: ClassicGame[]) => void)): Promise<void> {
+    const convertResult = x => observer(x.docs.map(d => ({...d.data(), key: d.id})));
+    onSnapshot<ClassicGame>(
+      query<ClassicGame>(
+        this.getCollectionRef<ClassicGame>(channel),
+        orderBy('date', 'desc'),
+        where('user', '==', this.authService.userUid.value),
+        where('finished', '==', true)
       ),
       convertResult
     );

@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "",
+    "mappings": "AAAA,AAAA,aAAa,CAAA;EACT,OAAO,EAAE,YAAY;CACxB",
     "sources": [
         "classicbot.page.scss"
     ],

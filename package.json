@@ -10,7 +10,12 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "android": "ionic build --prod && npx cap sync android && npx cap open android"
+    "android": "ionic build --prod && npx cap sync android && npx cap open android",
+    "android-icon-adaptive": "cordova-res android --type adaptive-icon --icon-foreground-source resources/icon.png --icon-background-source #FFFFFF --skip-config --copy",
+    "android-splash": "cordova-res android --type splash --skip-config --copy",
+    "android-resources": "npm run android-splash && npm run android-icon-adaptive",
+    "ios-resources": "cordova-res ios --skip-config --copy",
+    "gen-resources": "npm run ios-resources && npm run android-resources"
   },
   "private": true,
   "dependencies": {

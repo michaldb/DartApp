@@ -41,6 +41,10 @@ export class AuthService {
 
   async signOut(): Promise<void> {
     await FirebaseAuthentication.signOut();
+
+    if (Capacitor.isNativePlatform()) {
+      await signOut(this.auth);
+    }
   }
 
   async signInWithGoogle(): Promise<void> {
@@ -56,6 +60,10 @@ export class AuthService {
     const { credential: { idToken, accessToken } } = await FirebaseAuthentication.signInWithGithub();
 
     if (Capacitor.isNativePlatform()) {
+      // const provider = new GithubAuthProvider();
+      // provider.addScope('repo');
+      // const auth = getAuth();
+      // signInWithPopup(auth, provider);
       const credential = GithubAuthProvider.credential(idToken);
       await signInWithCredential(this.auth, credential);
     }

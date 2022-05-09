@@ -13,7 +13,7 @@ export class ClassicbotPage implements OnInit {
   classicGames: ClassicGame[] = [];
 
   constructor(private database: DatabaseService) {
-    this.database.retrieveGamesInRealTime('classicGame', x => this.classicGames = x);
+    this.database.retrieveOpenGamesInRealTime('classicGame', x => this.classicGames = x);
   }
 
   ngOnInit() {
@@ -29,7 +29,16 @@ export class ClassicbotPage implements OnInit {
     return `${date.getDate()}/${(date.getMonth() + 1)}/${date.getFullYear()} - ${date.getHours()}:${('0'+ date.getMinutes()).slice(-2)}`;
   }
 
-  async startNewGame(): Promise<void> {
+  public checkIsNew(classicGame: ClassicGame): boolean {
+    const gameDate = new Date(classicGame.date + 10*60000);
+    const date = new Date();
+    if (gameDate > date) {
+      return true;
+    }
+    return false;
+  }
+
+  public async startNewGame(): Promise<void> {
     await this.database.startNewGame(this.startScore, this.difficulty);
   }
 }
