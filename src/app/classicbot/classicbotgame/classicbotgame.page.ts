@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { DatabaseService } from 'src/app/services/database.service';
 import { ClassicGame } from './../../types/classicgame';
 import { DifficultySettings } from './../../types/difficultyClassicGame';
+import Helpers from '../../helpers/helpers';
+import { Haptics, ImpactStyle } from '@capacitor/haptics';
+
 @Component({
   selector: 'app-classicbotgame',
   templateUrl: './classicbotgame.page.html',
@@ -18,15 +21,17 @@ export class ClassicbotgamePage implements OnInit {
   lastthrowBot: number;
   averageThrowPlayer: number;
   averageThrowBot: number;
+  helper: Helpers;
 
-  // eslint-disable-next-line max-len
-  constructor(private database: DatabaseService, public activatedRoute: ActivatedRoute, public alertController: AlertController, public router: Router) {
+  constructor(private database: DatabaseService, public activatedRoute: ActivatedRoute, public alertController: AlertController,
+    public router: Router, public navController: NavController) {
+    this.helper = new Helpers();
     this.database.retrieveGameById(this.id).then(res => {
       this.classicGameObj = res;
       this.lastthrowPlayer = Number(this.classicGameObj.playerThrows.slice(-1));
       this.lastthrowBot = Number(this.classicGameObj.botThrows.slice(-1));
-      this.averageThrowPlayer = this.getSumOfThrows(this.classicGameObj.playerThrows) / this.classicGameObj.playerThrows.length;
-      this.averageThrowBot = this.getSumOfThrows(this.classicGameObj.botThrows) / this.classicGameObj.playerThrows.length;
+      this.averageThrowPlayer = this.helper.getSumOfThrows(this.classicGameObj.playerThrows) / this.classicGameObj.playerThrows.length;
+      this.averageThrowBot = this.helper.getSumOfThrows(this.classicGameObj.botThrows) / this.classicGameObj.playerThrows.length;
     });
   }
   ngOnInit() {}
@@ -40,11 +45,6 @@ export class ClassicbotgamePage implements OnInit {
     });
 
     await alert.present();
-  }
-
-  public formatFirestoreDatetime(timestamp: number) {
-    const date = new Date(timestamp);
-    return `${date.getDate()}/${(date.getMonth() + 1)}/${date.getFullYear()} - ${date.getHours()}:${('0'+ date.getMinutes()).slice(-2)}`;
   }
 
   public checkPlayerThrow(): boolean {
@@ -73,12 +73,15 @@ export class ClassicbotgamePage implements OnInit {
         this.presentAlert('You have won!', 'Congratulations you have won the game!', 'You are redirected to the overview page.');
         this.classicGameObj.haswon = true;
         this.classicGameObj.haswon = true;
+        this.database.updateGameById(this.id, this.classicGameObj);
         this.endGame();
+        return;
       }
 
       this.classicGameObj.playerThrows.push(Number(this.playerThrow));
-      this.classicGameObj.remainingScorePlayer = this.classicGameObj.startScore - this.getSumOfThrows(this.classicGameObj.playerThrows);
-      this.averageThrowPlayer = this.getSumOfThrows(this.classicGameObj.playerThrows) / this.classicGameObj.playerThrows.length;
+      // eslint-disable-next-line max-len
+      this.classicGameObj.remainingScorePlayer = this.classicGameObj.startScore - this.helper.getSumOfThrows(this.classicGameObj.playerThrows);
+      this.averageThrowPlayer = this.helper.getSumOfThrows(this.classicGameObj.playerThrows) / this.classicGameObj.playerThrows.length;
       this.lastthrowPlayer = Number(this.classicGameObj.playerThrows.slice(-1));
 
       this.takeTurnBot();
@@ -95,7 +98,7 @@ export class ClassicbotgamePage implements OnInit {
     this.router.navigate(['/classicbot']);
   }
 
-  public takeTurnBot(): void {
+  public async takeTurnBot(): Promise<void> {
     const difficultySettings = this.setDifficulty();
 
     if (this.classicGameObj.remainingScoreBot > difficultySettings.startCheckout) {
@@ -103,8 +106,8 @@ export class ClassicbotgamePage implements OnInit {
       const rndNumber = Math.round(Math.random() * (difficultySettings.maxThrow - difficultySettings.minThrow + 1)) + difficultySettings.minThrow;
 
       this.classicGameObj.botThrows.push(Number(rndNumber));
-      this.classicGameObj.remainingScoreBot = this.classicGameObj.startScore - this.getSumOfThrows(this.classicGameObj.botThrows);
-      this.averageThrowBot = this.getSumOfThrows(this.classicGameObj.botThrows) / this.classicGameObj.playerThrows.length;
+      this.classicGameObj.remainingScoreBot = this.classicGameObj.startScore - this.helper.getSumOfThrows(this.classicGameObj.botThrows);
+      this.averageThrowBot = this.helper.getSumOfThrows(this.classicGameObj.botThrows) / this.classicGameObj.playerThrows.length;
       this.lastthrowBot = Number(this.classicGameObj.botThrows.slice(-1));
     }
     else {
@@ -119,13 +122,16 @@ export class ClassicbotgamePage implements OnInit {
         this.endGame();
       }
 
-      this.classicGameObj.remainingScoreBot = this.classicGameObj.remainingScoreBot - throwBot;
-      this.lastthrowBot = Number(throwBot);
-
-      if ( this.classicGameObj.remainingScoreBot === 1) {
-        this.classicGameObj.remainingScoreBot++;
+      if (this.classicGameObj.remainingScoreBot - throwBot === 1) {
+        throwBot++;
       }
+
+      this.classicGameObj.botThrows.push(Number(throwBot));
+      this.classicGameObj.remainingScoreBot = this.classicGameObj.startScore - this.helper.getSumOfThrows(this.classicGameObj.botThrows);
+      this.lastthrowBot = Number(throwBot);
     }
+
+    await Haptics.vibrate();
   }
 
   private setDifficulty(): DifficultySettings{
@@ -175,14 +181,5 @@ export class ClassicbotgamePage implements OnInit {
     };
 
     return difficultySettings;
-  }
-
-  private getSumOfThrows(array): number {
-    let total = 0;
-    array.forEach(value => {
-      total = total + value;
-    });
-
-    return total;
   }
 }

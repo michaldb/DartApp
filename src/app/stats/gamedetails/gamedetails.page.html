@@ -17,6 +17,7 @@
     </ion-card-header>
     <ion-card-content>
       <p>Game outcome: {{classicGameObj.haswon ? "Win" : "Lose"}}</p>
+      <p>Game startdate: {{helper.formatFirestoreDatetime(classicGameObj.date)}}</p>
       <p>Startscore: {{classicGameObj.startScore}}</p>
       <p [ngSwitch]="classicGameObj.difficulty">Difficulty: 
         <span *ngSwitchCase="1">Beginner</span>

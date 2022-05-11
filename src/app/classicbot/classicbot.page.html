@@ -61,7 +61,7 @@
         <ion-item *ngFor="let classicGame of classicGames">
           <ion-label [routerLink]="['classicbotgame', classicGame.key]">
             <h2>Start: {{classicGame.startScore}}</h2>
-            <h3>{{formatFirestoreDatetime(classicGame.date)}}</h3>
+            <h3>{{helper.formatFirestoreDatetime(classicGame.date)}}</h3>
             <p [ngSwitch]="classicGame.difficulty">Difficulty: 
               <span *ngSwitchCase="1">Beginner</span>
               <span *ngSwitchCase="2">Easy</span>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ClassicGame } from '../types/classicgame';
 import { DatabaseService } from './../services/database.service';
+import Helpers from '../helpers/helpers';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-classicbot',
@@ -11,8 +13,10 @@ export class ClassicbotPage implements OnInit {
   startScore: number;
   difficulty: number;
   classicGames: ClassicGame[] = [];
+  helper: Helpers;
 
-  constructor(private database: DatabaseService) {
+  constructor(private database: DatabaseService, public alertController: AlertController) {
+    this.helper = new Helpers();
     this.database.retrieveOpenGamesInRealTime('classicGame', x => this.classicGames = x);
   }
 
@@ -22,11 +26,6 @@ export class ClassicbotPage implements OnInit {
 
   public customFormatter(value: number) {
     return `${value}`;
-  }
-
-  public formatFirestoreDatetime(timestamp: number): string {
-    const date = new Date(timestamp);
-    return `${date.getDate()}/${(date.getMonth() + 1)}/${date.getFullYear()} - ${date.getHours()}:${('0'+ date.getMinutes()).slice(-2)}`;
   }
 
   public checkIsNew(classicGame: ClassicGame): boolean {
@@ -39,6 +38,30 @@ export class ClassicbotPage implements OnInit {
   }
 
   public async startNewGame(): Promise<void> {
+    if (!this.checkPlayerThrow()) {return;}
     await this.database.startNewGame(this.startScore, this.difficulty);
+  }
+
+  public checkPlayerThrow(): boolean {
+    if (this.startScore === undefined || this.startScore === null) {
+      this.presentAlert('Oeps!', 'No startscore selected', 'Please select a startscore!');
+      return false;
+    } else if (this.difficulty === undefined || this.difficulty === null) {
+      this.presentAlert('Oeps!', 'No difficulty selected', 'Please select a difficulty!');
+      return false;
+    }
+
+    return true;
+  }
+
+  public async presentAlert(headerTxt, subheaderTxt, messageTxt) {
+    const alert = await this.alertController.create({
+      header: headerTxt,
+      subHeader: subheaderTxt,
+      message: messageTxt,
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 }

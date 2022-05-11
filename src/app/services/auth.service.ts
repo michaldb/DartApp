@@ -60,11 +60,7 @@ export class AuthService {
     const { credential: { idToken, accessToken } } = await FirebaseAuthentication.signInWithGithub();
 
     if (Capacitor.isNativePlatform()) {
-      // const provider = new GithubAuthProvider();
-      // provider.addScope('repo');
-      // const auth = getAuth();
-      // signInWithPopup(auth, provider);
-      const credential = GithubAuthProvider.credential(idToken);
+      const credential = GithubAuthProvider.credential(accessToken);
       await signInWithCredential(this.auth, credential);
     }
   }

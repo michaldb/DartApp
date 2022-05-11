@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from '../services/database.service';
 import { ClassicGame } from '../types/classicgame';
+import Helpers from '../helpers/helpers';
 
 @Component({
   selector: 'app-stats',
@@ -13,9 +14,11 @@ export class StatsPage implements OnInit {
   totalPlayedGames: number;
   totalWonGames: number;
   totalLostGames: number;
+  helper: Helpers;
 
   constructor(private database: DatabaseService) {
     this.database.retrieveAllClosedGamesInRealTime('classicGame', x => {
+      this.helper = new Helpers();
       this.classicGames = x;
       this.recentGames = x.slice(0, 5);
       this.totalPlayedGames = x.length;
@@ -25,9 +28,4 @@ export class StatsPage implements OnInit {
   }
 
   ngOnInit() {}
-
-  public formatFirestoreDatetime(timestamp: number): string {
-    const date = new Date(timestamp);
-    return `${date.getDate()}/${(date.getMonth() + 1)}/${date.getFullYear()} - ${date.getHours()}:${('0'+ date.getMinutes()).slice(-2)}`;
-  }
 }

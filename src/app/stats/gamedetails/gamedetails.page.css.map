@@ -2,8 +2,8 @@
     "version": 3,
     "mappings": "",
     "sources": [
-        "classicbot.page.scss"
+        "gamedetails.page.scss"
     ],
     "names": [],
-    "file": "classicbot.page.css"
+    "file": "gamedetails.page.css"
 }

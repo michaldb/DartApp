@@ -10,13 +10,14 @@
 <ion-content *ngIf="classicGameObj">
   <ion-card>
     <ion-card-header>
-      <ion-card-subtitle>{{formatFirestoreDatetime(classicGameObj.date)}}</ion-card-subtitle>
+      <ion-card-subtitle>{{helper.formatFirestoreDatetime(classicGameObj.date)}}</ion-card-subtitle>
       <ion-card-title>Classic - {{classicGameObj.startScore}}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-row class="ion-align-items-center">
         <p>Difficulty: {{classicGameObj.difficulty}}</p>
         <ion-button (click)="endGame()" color="danger" class="ion-margin-horizontal">End Game</ion-button>
+        <ion-button (click)="navController.back()">Back</ion-button>
       </ion-row>
     </ion-card-content>
   </ion-card>
