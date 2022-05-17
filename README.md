@@ -32,6 +32,8 @@ Michal De Batselier r0808913
     - PWA: /
     - APK: /
     - ZIP: /
+    - Screenshot deadline:
+    - Screenshot website online:
 - [x] Persistentie:
     - Spelers hun spellen worden opgeslagen in Firestore en weergegeven doorheen de applicatie
     - Spelers moeten inloggen om te kunnen spelen op de applicatie en hun data te raadplegen
