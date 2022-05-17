@@ -25,7 +25,7 @@ Michal De Batselier r0808913
     - /
 - [x] 3 online service:
     - Firestore
-    - Firebase Authentication
+    - Firebase Authentication (github, google, phone)
     - /
 - [x] Logo en Splashscreen
 - [x] Publicatie:
