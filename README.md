@@ -22,7 +22,7 @@ Michal De Batselier r0808913
 - [x] 3 Plugins:
     - capacitor/network
     - capacitor/haptics
-    - /
+    - capacitor/share
 - [x] 3 online service:
     - Firestore
     - Firebase Authentication (github, google, phone)
