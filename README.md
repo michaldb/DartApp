@@ -18,7 +18,7 @@ Michal De Batselier r0808913
     - stats
     - gamedetails
     - home
-- Navigatie tussen pagina's [x]
+- [x] Navigatie tussen pagina's
 - 3 Plugins:
     - capacitor/network
     - capacitor/haptics
@@ -27,7 +27,7 @@ Michal De Batselier r0808913
     - Firestore
     - Firebase Authentication
     - /
-- Logo en Splashscreen [x]
+- [x] Logo en Splashscreen
 - Publicatie:
     - PWA: /
     - APK: /
@@ -35,4 +35,4 @@ Michal De Batselier r0808913
 - Persistentie:
     - Spelers hun spellen worden opgeslagen in Firestore en weergegeven doorheen de applicatie
     - Spelers moeten inloggen om te kunnen spelen op de applicatie en hun data te raadplegen
-- Publicatie Responsive [x]
+- [x] Publicatie Responsive
