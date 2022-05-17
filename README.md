@@ -23,10 +23,9 @@ Michal De Batselier r0808913
     - capacitor/network
     - capacitor/haptics
     - capacitor/share
-- [x] 3 online service:
+- [x] 2 online service:
     - Firestore
     - Firebase Authentication (github, google, phone)
-    - /
 - [x] Logo en Splashscreen
 - [x] Publicatie:
     - PWA: /
