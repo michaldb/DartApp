@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {ModalController} from '@ionic/angular';
 import codes from 'country-calling-code';
@@ -9,7 +9,7 @@ import {CallingCode} from '../../types/callingCode';
   templateUrl: './phone-verification.component.html',
   styleUrls: ['./phone-verification.component.scss'],
 })
-export class PhoneVerificationComponent implements OnInit {
+export class PhoneVerificationComponent{
 
   // The country codes for all countries.
   countryCodes: CallingCode[];
@@ -39,9 +39,6 @@ export class PhoneVerificationComponent implements OnInit {
   constructor(private authService: AuthService, private modalController: ModalController) {
     // The country-calling-code library doesn't include types.
     this.countryCodes = codes.map(c => new CallingCode(c));
-  }
-
-  ngOnInit() {
   }
 
   /**

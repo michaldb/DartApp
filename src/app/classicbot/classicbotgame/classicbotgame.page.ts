@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, NavController } from '@ionic/angular';
 import { DatabaseService } from 'src/app/services/database.service';
 import { ClassicGame } from './../../types/classicgame';
 import { DifficultySettings } from './../../types/difficultyClassicGame';
 import Helpers from '../../helpers/helpers';
-import { Haptics, ImpactStyle } from '@capacitor/haptics';
+import { Haptics } from '@capacitor/haptics';
 
 @Component({
   selector: 'app-classicbotgame',
@@ -13,7 +13,7 @@ import { Haptics, ImpactStyle } from '@capacitor/haptics';
   styleUrls: ['./classicbotgame.page.scss'],
 })
 
-export class ClassicbotgamePage implements OnInit {
+export class ClassicbotgamePage{
   id = this.activatedRoute.snapshot.paramMap.get('id');
   classicGameObj: ClassicGame;
   playerThrow: number;
@@ -34,7 +34,6 @@ export class ClassicbotgamePage implements OnInit {
       this.averageThrowBot = this.helper.getSumOfThrows(this.classicGameObj.botThrows) / this.classicGameObj.playerThrows.length;
     });
   }
-  ngOnInit() {}
 
   public async presentAlert(headerTxt, subheaderTxt, messageTxt) {
     const alert = await this.alertController.create({

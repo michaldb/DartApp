@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 import { DatabaseService } from './../services/database.service';
 
 @Component({
@@ -7,5 +8,7 @@ import { DatabaseService } from './../services/database.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  constructor(private database: DatabaseService) {}
+  test;
+
+  constructor(private database: DatabaseService, public authService: AuthService) {}
 }
