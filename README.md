@@ -7,7 +7,6 @@ Michal De Batselier r0808913
 ## Applicatie
 - PWA: https://dartapp-23db1.web.app
 - APK: [dartapp.apk](https://github.com/michaldb/DartApp/blob/3147c678eb0f74019fff097db4d8b8a6682e9350/dartapp.apk)
-- ZIP: 
 - Screenshot deadline:
 - Screenshot website online:
 
@@ -30,7 +29,6 @@ Michal De Batselier r0808913
 - [x] Publicatie:
     - PWA: https://dartapp-23db1.web.app
     - APK: [dartapp.apk](https://github.com/michaldb/DartApp/blob/3147c678eb0f74019fff097db4d8b8a6682e9350/dartapp.apk)
-    - ZIP: /
     - Screenshot deadline:
     - Screenshot website online:
 - [x] Persistentie:
