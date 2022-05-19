@@ -7,8 +7,8 @@ Michal De Batselier r0808913
 ## Applicatie
 - PWA: https://dartapp-23db1.web.app
 - APK: [dartapp.apk](https://github.com/michaldb/DartApp/blob/3147c678eb0f74019fff097db4d8b8a6682e9350/dartapp.apk)
-- Screenshot deadline:
-- Screenshot website online:
+- Screenshot deadline: 
+- Screenshot website online: [Screenshot](https://github.com/michaldb/DartApp/blob/e6a83934acd46456f3a45e46a411ec87ebfe566b/website-online.png)
 
 ## Minimale en uitgebreide vereisten
 - [x] 4 dynamische pagina's:
