@@ -5,7 +5,7 @@ Michal De Batselier r0808913
 
 
 ## Applicatie
-- PWA:
+- PWA: https://dartapp-23db1.web.app
 - APK:
 - ZIP:
 - Screenshot deadline:
@@ -28,7 +28,7 @@ Michal De Batselier r0808913
     - Firebase Authentication (github, google, phone)
 - [x] Logo en Splashscreen
 - [x] Publicatie:
-    - PWA: /
+    - PWA: https://dartapp-23db1.web.app
     - APK: /
     - ZIP: /
     - Screenshot deadline:
