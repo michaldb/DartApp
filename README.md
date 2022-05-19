@@ -6,8 +6,8 @@ Michal De Batselier r0808913
 
 ## Applicatie
 - PWA: https://dartapp-23db1.web.app
-- APK:
-- ZIP:
+- APK: dartapp.apk
+- ZIP: 
 - Screenshot deadline:
 - Screenshot website online:
 
