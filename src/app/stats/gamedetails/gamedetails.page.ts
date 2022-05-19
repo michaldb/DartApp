@@ -26,7 +26,7 @@ export class GamedetailsPage{
     });
   }
 
-  public async shareGameDetails() {
+  public async shareGameDetails(): Promise<void> {
     let difficulty: string;
 
     switch (this.classicGameObj.difficulty) {
@@ -48,7 +48,7 @@ export class GamedetailsPage{
     }
     await Share.share({
       title: 'See my dart game stats!',
-      // Dit moet op een single line staan anders geeft dit rare uitkomsten op bepaalde platformen
+      // Dit moet op een single line staan anders geeft dit rare uitkomsten voor de layout op bepaalde platformen
       // eslint-disable-next-line max-len
       text: `Hey, i played a game of darts, look at my stats!\nGame outcome: ${this.classicGameObj.haswon ? 'Win' : 'Lose'}\nGame startdate: ${this.helper.formatFirestoreDatetime(this.classicGameObj.date)}\nStartscore: ${this.classicGameObj.startScore}\nDifficulty: ${difficulty} (${this.classicGameObj.difficulty})\nAverage throw player: ${this.averageThrowPlayer.toFixed(2)}`
     });

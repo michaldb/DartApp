@@ -35,7 +35,7 @@ export class ClassicbotgamePage{
     });
   }
 
-  public async presentAlert(headerTxt, subheaderTxt, messageTxt) {
+  public async presentAlert(headerTxt, subheaderTxt, messageTxt): Promise<void> {
     const alert = await this.alertController.create({
       header: headerTxt,
       subHeader: subheaderTxt,

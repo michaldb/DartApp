@@ -8,7 +8,7 @@ export default class Helpers {
         return total;
     }
 
-    public formatFirestoreDatetime(timestamp: number) {
+    public formatFirestoreDatetime(timestamp: number): string {
         const date = new Date(timestamp);
         // eslint-disable-next-line max-len
         return `${date.getDate()}/${(date.getMonth() + 1)}/${date.getFullYear()} - ${date.getHours()}:${('0'+ date.getMinutes()).slice(-2)}`;

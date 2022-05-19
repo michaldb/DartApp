@@ -24,7 +24,7 @@ export class ClassicbotPage implements OnInit {
     this.difficulty = 3;
   }
 
-  public customFormatter(value: number) {
+  public customFormatter(value: number): string {
     return `${value}`;
   }
 
@@ -54,7 +54,7 @@ export class ClassicbotPage implements OnInit {
     return true;
   }
 
-  public async presentAlert(headerTxt, subheaderTxt, messageTxt) {
+  public async presentAlert(headerTxt, subheaderTxt, messageTxt): Promise<void> {
     const alert = await this.alertController.create({
       header: headerTxt,
       subHeader: subheaderTxt,

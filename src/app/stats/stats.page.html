@@ -23,7 +23,6 @@
     <ion-card-content>
       <ion-list>
         <ion-item *ngFor="let recentGame of recentGames">
-          <!-- link nog plaatsen naar overzicht worpen -->
           <ion-label [routerLink]="['gamedetails', recentGame.key]">
             <h2>Start: {{recentGame.startScore}}</h2>
             <h3>{{helper.formatFirestoreDatetime(recentGame.date)}}</h3>

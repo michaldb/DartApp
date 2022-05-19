@@ -8,7 +8,5 @@ import { DatabaseService } from './../services/database.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  test;
-
   constructor(private database: DatabaseService, public authService: AuthService) {}
 }

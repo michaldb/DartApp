@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { DatabaseService } from '../services/database.service';
 import { ClassicGame } from '../types/classicgame';
 import Helpers from '../helpers/helpers';
@@ -8,7 +8,7 @@ import Helpers from '../helpers/helpers';
   templateUrl: './stats.page.html',
   styleUrls: ['./stats.page.scss'],
 })
-export class StatsPage implements OnInit {
+export class StatsPage {
   classicGames: ClassicGame[] = [];
   recentGames: ClassicGame[] = [];
   totalPlayedGames: number;
@@ -26,6 +26,4 @@ export class StatsPage implements OnInit {
       this.totalLostGames = x.filter(game => game.haswon === false).length;
     });
   }
-
-  ngOnInit() {}
 }
