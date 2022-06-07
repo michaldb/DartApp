@@ -68,6 +68,8 @@ export class ClassicbotgamePage{
     if (this.playerThrow != null && this.classicGameObj.remainingScorePlayer > 1) {
       if (!this.checkPlayerThrow()) {return;}
 
+      this.classicGameObj.playerThrows.push(Number(this.playerThrow));
+
       if (Number(this.playerThrow) === Number(this.classicGameObj.remainingScorePlayer)) {
         this.presentAlert('You have won!', 'Congratulations you have won the game!', 'You are redirected to the overview page.');
         this.classicGameObj.haswon = true;
@@ -77,7 +79,6 @@ export class ClassicbotgamePage{
         return;
       }
 
-      this.classicGameObj.playerThrows.push(Number(this.playerThrow));
       // eslint-disable-next-line max-len
       this.classicGameObj.remainingScorePlayer = this.classicGameObj.startScore - this.helper.getSumOfThrows(this.classicGameObj.playerThrows);
       this.averageThrowPlayer = this.helper.getSumOfThrows(this.classicGameObj.playerThrows) / this.classicGameObj.playerThrows.length;
