@@ -6,7 +6,7 @@ Michal De Batselier r0808913
 
 ## Applicatie
 - PWA: https://dartapp-23db1.web.app
-- APK: [dartapp.apk](https://github.com/michaldb/DartApp/blob/3147c678eb0f74019fff097db4d8b8a6682e9350/dartapp.apk)
+- APK: [dartapp.apk](https://github.com/michaldb/DartApp/blob/d8aaa08652bb4f976db0320176e0494bd82699b2/dartapp.apk)
 - Screenshot deadline: 
 - Screenshot website online: [Screenshot](https://github.com/michaldb/DartApp/blob/e6a83934acd46456f3a45e46a411ec87ebfe566b/website-online.png)
 
@@ -28,7 +28,7 @@ Michal De Batselier r0808913
 - [x] Logo en Splashscreen
 - [x] Publicatie:
     - PWA: https://dartapp-23db1.web.app
-    - APK: [dartapp.apk](https://github.com/michaldb/DartApp/blob/3147c678eb0f74019fff097db4d8b8a6682e9350/dartapp.apk)
+    - APK: [dartapp.apk](https://github.com/michaldb/DartApp/blob/d8aaa08652bb4f976db0320176e0494bd82699b2/dartapp.apk)
     - Screenshot deadline:
     - Screenshot website online: [Screenshot](https://github.com/michaldb/DartApp/blob/e6a83934acd46456f3a45e46a411ec87ebfe566b/website-online.png)
 - [x] Persistentie:
